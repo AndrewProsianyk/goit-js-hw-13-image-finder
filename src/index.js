@@ -1,25 +1,33 @@
 import './sass/main.scss';
 import ApiService from './js/apiService.js';
 import photoCardTpl from './templates/photo-card.hbs';
-// import LoadMoreBtn from './js/load-more-btn.js';
-// import error from './error';
+import LoadMoreBtn from './js/load-more-btn.js';
+import { error } from '@pnotify/core';
 var debounce = require('lodash.debounce');
+
+export default function errorNotFound() {
+    error({
+        title: 'Oops!',
+        text: 'Repeat your request!',
+        delay: 1000,
+    });
+}
 
 const refs = {
     searchForm: document.querySelector('#search-form'),
     galleryContainer: document.querySelector('.gallery'),
 };
 
-// const loadMoreBtn = new LoadMoreBtn({
-//     selector: '[data-action="load-more"]',
-//     hidden: true,
-// });
+const loadMoreBtn = new LoadMoreBtn({
+    selector: '[data-action="load-more"]',
+    hidden: true,
+});
 const apiService = new ApiService();
 
 
 
 refs.searchForm.addEventListener('input', debounce(onSearch,300));
-// loadMoreBtn.refs.button.addEventListener('click', fetchGallery);
+loadMoreBtn.refs.button.addEventListener('click', fetchGallery);
 
 function onSearch(event) {
     event.preventDefault();
@@ -28,7 +36,7 @@ function onSearch(event) {
 
     if (apiService.query !== ' ' && apiService.query !== '' ) {
         
-    // loadMoreBtn.show();
+    loadMoreBtn.show();
     apiService.resetPage();
     clearGalleryContainer();
     fetchGallery();
@@ -38,17 +46,17 @@ function onSearch(event) {
 }
 
 function fetchGallery() {
-    // loadMoreBtn.disable();
+    loadMoreBtn.disable();
     apiService.fetchGallery().then(hits => {
 
         if (hits.length < 12) {
             console.log(hits.length);
-            // loadMoreBtn.hide();
+            loadMoreBtn.hide();
             appendCardMarkup(hits);
             return;
         }
             appendCardMarkup(hits);
-            // loadMoreBtn.enable();
+            loadMoreBtn.enable();
         
         if (apiService.page > 2) {
             console.log(apiService.page);
@@ -58,14 +66,14 @@ function fetchGallery() {
             });
         }
     });
-    // setTimeout(scrollDown, 600);
-    // function scrollDown() {
+    setTimeout(scrollDown, 600);
+    function scrollDown() {
         
-    //     document.querySelector('.btn').scrollIntoView({
-    //   behavior: 'smooth',
-    //   block: 'end',
-    // });
-    // }
+        document.querySelector('.btn').scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+    }
         
 }
 
@@ -76,3 +84,4 @@ function appendCardMarkup(hits) {
 function clearGalleryContainer() {
     refs.galleryContainer.innerHTML = '';
 }
+
