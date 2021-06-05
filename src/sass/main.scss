@@ -10,6 +10,7 @@ html {
 
 body {
   margin: 50px;
+  background-color: rgb(201, 236, 190);
 }
 
 form {
@@ -17,11 +18,12 @@ form {
   justify-content: center;
 }
 input {
-  border-radius: 7px;
+  border-radius: 5px;
   padding: 5px 15px;
 }
 ul {
   padding: 0;
+  margin-top: 20px;
 }
 
 li {
@@ -38,7 +40,7 @@ img {
 .search-form {
   display: flex;
   padding: 20px 0;
-  align-items: flex-end;
+  margin-top: -30px;
 }
 .form-group {
   width: 500px;
@@ -62,7 +64,7 @@ img {
 
 input::placeholder {
   font-size: 15px;
-  color: grey;
+  color: rgb(145, 100, 100);
 }
 
 .button {
@@ -87,7 +89,7 @@ input::placeholder {
   text-align: center;
   display: flex;
   flex-wrap: wrap;
-  margin: -15px;
+  margin-bottom: -15px;
 }
 .photo-card {
   flex-basis: calc(100% / 4 - 15px);
@@ -115,9 +117,14 @@ input::placeholder {
 }
 .stats-item {
   display: flex;
-
   margin-right: 15px;
   margin-left: 15px;
   flex-direction: column;
   align-items: center;
+}
+.btn {
+  width: 150px;
+  height: 30px;
+  background-color: rgb(63, 151, 63);
+  border-radius: 3px;
 }

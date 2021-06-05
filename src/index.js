@@ -2,16 +2,11 @@ import './sass/main.scss';
 import ApiService from './js/apiService.js';
 import photoCardTpl from './templates/photo-card.hbs';
 import LoadMoreBtn from './js/load-more-btn.js';
-import { error } from '@pnotify/core';
+import error from './js/pnotifuy-error.js';
+import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/PNotify.css';
 var debounce = require('lodash.debounce');
 
-export default function errorNotFound() {
-    error({
-        title: 'Oops!',
-        text: 'Repeat your request!',
-        delay: 1000,
-    });
-}
 
 const refs = {
     searchForm: document.querySelector('#search-form'),
